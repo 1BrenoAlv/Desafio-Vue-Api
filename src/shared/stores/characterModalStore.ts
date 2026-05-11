@@ -13,7 +13,6 @@ export const useCharacterModalStore = defineStore('modalCharacter', () => {
   const fetchCharacterById = async (id: number): Promise<void> => {
     try {
       isLoading.value = true;
-      error.value = 'Carregando...';
       const char = await characterService.getCharacterByIdService(id);
       console.log(char);
       character.value = char;

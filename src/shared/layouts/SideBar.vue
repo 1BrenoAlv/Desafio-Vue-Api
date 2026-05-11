@@ -4,6 +4,7 @@ import { useCharacterStore } from '../stores/characterStore';
 import { toast } from 'vue-sonner';
 
 const characterStore = useCharacterStore();
+
 const {
   queryName, queryStatus, querySpecies, queryGender
 } = storeToRefs(characterStore);
@@ -17,7 +18,7 @@ const handleClearFilters = (): void => {
 
 </script>
 <template>
-  <div class=" flex flex-col min-h-screen min-w-[300px] bg-blue-950 rounded-br-2xl">
+  <div class=" flex flex-col h-full w-72 bg-blue-950 rounded-br-2xl">
     <div class="flex flex-col p-3 gap-2">
       <label class="text-base font-bold text-[#F0EBD8] mb-1">Buscar</label>
       <input v-model="queryName" type="text" placeholder="Nome do personagem..."
@@ -55,7 +56,7 @@ const handleClearFilters = (): void => {
         <option value="genderless">Sem Gênero</option>
         <option value="unknown">Desconhecido</option>
       </select>
-      <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded mt-2" @click="applyFilter">
+      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2" @click="applyFilter">
         Buscar Personagens
       </button>
       <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded mt-2"
