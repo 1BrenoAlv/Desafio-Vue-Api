@@ -17,17 +17,23 @@ const handleClearFilters = (): void => {
 
 </script>
 <template>
-  <div class=" flex flex-col min-h-screen min-w-[300px] bg-blue-950 rounded-r-2xl">
-    <div class="flex flex-col p-3">
-      <input v-model="queryName" type="text" name="" placeholder="Nome do personagem..."
+  <div class=" flex flex-col min-h-screen min-w-[300px] bg-blue-950 rounded-br-2xl">
+    <div class="flex flex-col p-3 gap-2">
+      <label class="text-base font-bold text-[#F0EBD8] mb-1">Buscar</label>
+      <input v-model="queryName" type="text" placeholder="Nome do personagem..."
+        class="w-full bg-white p-[10px] text-left text-sm font-medium border border-gray-300 rounded-[7px] outline-none cursor-text transition-all duration-200 ease-in-out hover:border-[#0d132166] hover:shadow-[0_2px_5px_rgba(0,0,0,0.05)] focus:border-gray-400 focus:ring-[2px] focus:ring-[#03419750]"
         @keyup.enter="characterStore.applyFilter">
-      <select v-model="queryStatus" name="">
+      <label class="text-base font-bold text-[#F0EBD8] mb-1">Filtros</label>
+      <select v-model="queryStatus"
+        class="w-full bg-white p-[10px] text-left text-sm font-medium border border-gray-300 rounded-[7px] outline-none cursor-pointer transition-all duration-200 ease-in-out hover:border-[#0d132166] hover:shadow-[0_2px_5px_rgba(0,0,0,0.05)] focus:border-gray-400 focus:ring-[2px] focus:ring-[#03419750]">
         <option value="">Todos Status</option>
         <option value="alive">Vivo</option>
         <option value="dead">Morto</option>
         <option value="unknown">Desconhecido</option>
       </select>
-      <select id="" v-model="querySpecies" name="">
+
+      <select v-model="querySpecies"
+        class="w-full bg-white p-[10px] text-left text-sm font-medium border border-gray-300 rounded-[7px] outline-none cursor-pointer transition-all duration-200 ease-in-out hover:border-[#0d132166] hover:shadow-[0_2px_5px_rgba(0,0,0,0.05)] focus:border-gray-400 focus:ring-[2px] focus:ring-[#03419750]">
         <option value="" selected>Todas as espécies</option>
         <option value="human">Humano</option>
         <option value="alien">Alienígena</option>
@@ -40,7 +46,9 @@ const handleClearFilters = (): void => {
         <option value="disease">Doença</option>
         <option value="unknown">Desconhecido</option>
       </select>
-      <select id="" v-model="queryGender" name="">
+
+      <select v-model="queryGender"
+        class="w-full bg-white p-[10px] text-left text-sm font-medium border border-gray-300 rounded-[7px] outline-none cursor-pointer transition-all duration-200 ease-in-out hover:border-[#0d132166] hover:shadow-[0_2px_5px_rgba(0,0,0,0.05)] focus:border-gray-400 focus:ring-[2px] focus:ring-[#03419750]">
         <option value="" selected>Todos os gêneros</option>
         <option value="male">Masculino</option>
         <option value="female">Feminino</option>
@@ -56,4 +64,6 @@ const handleClearFilters = (): void => {
       </button>
     </div>
   </div>
+
+
 </template>

@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 import { ref } from 'vue';
 import type { ICharacter, ICharacterParams } from '../types/character';
 import { characterService } from '../services/characterService';
+import axios from 'axios';
 
 export const useCharacterStore = defineStore('character', () => {
   const characters = ref<ICharacter[]>([]);
@@ -16,6 +17,8 @@ export const useCharacterStore = defineStore('character', () => {
   const queryGender = ref<string>('');
 
   const fetchCharacters = async (): Promise<void> => {
+    isLoading.value = true;
+    error.value = '';
     try {
       const params: ICharacterParams = {
         page: numberPage.value,
@@ -25,19 +28,27 @@ export const useCharacterStore = defineStore('character', () => {
       if (querySpecies.value) params.species = querySpecies.value;
       if (queryGender.value) params.gender = queryGender.value;
 
-      console.log('Paramentos: ' + params);
 
       const res = await characterService.getCharacters(params);
-      console.log(res);
       characters.value = res.data.results;
       totalPages.value = res.data.info.pages;
       totalCharacters.value = res.data.info.count;
       error.value = '';
-
     } catch (e) {
-      console.error('Erro ao buscar personagens: ' + e);
-      error.value = 'Nenhum personagem encontrado ou erro no servidor';
       characters.value = [];
+      totalPages.value = 0;
+      totalCharacters.value = 0;
+      if (axios.isAxiosError(e)) {
+        if (e.response?.status === 404) {
+          error.value = 'Nenhum personagem encontrado com esses filtros';
+        } else if (e.response) {
+          error.value = `Erro no servidor: ${e.response.status}. Tente novamente mais tarde.`;
+        } else {
+          error.value = 'Erro de conexão. Verifique sua internet.';
+        }
+      }
+      console.error('Erro desconhecido: ' + e);
+      error.value = 'Ocorreu um erro inesperado.';
     } finally {
       isLoading.value = false;
     }

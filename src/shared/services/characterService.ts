@@ -7,7 +7,6 @@ export const characterService = {
   },
   async getCharacterByIdService(id: number): Promise<ICharacter> {
     const resp = await api.get<ICharacter>('/character/' + id);
-    console.log(api.get('/character/' + id));
     return resp.data;
   }
 };
